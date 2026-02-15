@@ -1,45 +1,41 @@
-function random(min,max){
-  return Math.floor(Math.random()*(max-min)+min);
-}
+let selected = null;
+let timeout;
 
-document.getElementById("onlineMini").innerText=random(10,50);
-document.getElementById("visitMini").innerText=random(1,20);
-document.getElementById("visitasTotal").innerText=random(1000,20000);
-document.getElementById("uniqueUsers").innerText=random(1,10);
-
-let scripts={
- defense:0,
- spammer:0,
- sheriff:0,
- lava:0
+const scripts = {
+  "AP DEFENSE": "laodsyring (string) @codigo2026",
+  "AP Spammer": "spammer (string) @codigo2026",
+  "Sheriff vs Murder": "sheriff (string) @codigo2026",
+  "Lava Brainrots": "lava (string) @codigo2026"
 };
 
-function updateStats(){
- document.getElementById("cDefense").innerText=scripts.defense;
- document.getElementById("cSpammer").innerText=scripts.spammer;
- document.getElementById("cSheriff").innerText=scripts.sheriff;
- document.getElementById("cLava").innerText=scripts.lava;
- document.getElementById("totalScripts").innerText=
- scripts.defense+scripts.spammer+scripts.sheriff+scripts.lava;
+function selectScript(name){
+  selected = name;
+  alert("Seleccionaste: " + name);
 }
 
-function openVerify(script){
- window.currentScript=script;
- document.getElementById("verifyOverlay").style.display="flex";
+function openVerify(){
+  if(!selected){
+    alert("Selecciona un script primero");
+    return;
+  }
+
+  document.getElementById("overlay").style.display="flex";
+
+  timeout = setTimeout(()=>{
+    document.getElementById("overlay").style.display="none";
+  },10000);
 }
 
-function confirmVerify(){
- document.getElementById("verifyOverlay").style.display="none";
- scripts[currentScript]++;
- updateStats();
- alert("Script desbloqueado");
+function verify(){
+  clearTimeout(timeout);
+  window.open("https://discord.gg/cypherhub","_blank");
+
+  document.getElementById("scriptCode").innerText = scripts[selected];
+  document.getElementById("codeBox").style.display="block";
 }
 
-function updateClock(){
- const now=new Date();
- document.getElementById("clock").innerText=
- now.toLocaleTimeString("es-ES");
+function copyCode(){
+  const text = document.getElementById("scriptCode").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Código copiado");
 }
-setInterval(updateClock,1000);
-updateClock();
-updateStats();
