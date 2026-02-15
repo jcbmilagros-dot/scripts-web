@@ -4,109 +4,82 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cypher Hub</title>
+
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-</head>
 
+</head>
 <body>
 
-<!-- ===== TOP BAR ===== -->
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="live">● EN VIVO · HORA ESPAÑA</div>
-  <div class="stats-mini">
-    <span>🔥 Usuarios online <b id="onlineMini">0</b></span>
-    <span>👥 Visitantes hoy <b id="visitMini">0</b></span>
-    <span>🕒 <b id="clock"></b></span>
+  <div class="statsTop">
+    🔥 Usuarios online <span id="onlineCount">36</span> · 👥 Visitantes hoy <span id="visitCount">6</span>
   </div>
 </div>
 
-<!-- ===== HEADER ===== -->
-<header class="header">
+<!-- HEADER -->
+<div class="header">
   <h1>Cypher Hub</h1>
-  <p>⚡ Comunidad · Scripts · Descargas ⚡</p>
+  <div class="subtitle">⚡ Comunidad · Scripts · Descargas ⚡</div>
+  <div class="updateBox">ULTIMATE UPDATE · 14/02/2025</div>
+</div>
 
-  <div class="socials">
-    <a href="https://discord.gg/cypherhub" target="_blank" class="discordBtn">Discord</a>
-    <a href="#" class="tiktokBtn">TikTok</a>
-  </div>
-</header>
+<!-- CARDS -->
+<div class="grid">
 
-<!-- ===== CARDS ===== -->
-<section class="cards">
-
-  <div class="card" data-script="defense">
-    <div class="badge">UPD 13/02</div>
+  <div class="card">
+    <div class="topLabel">UPD 13/02</div>
+    <div class="counter">1,284</div>
     <h2>AP DEFENSE</h2>
     <p>🛡 Anti-Pam · Protocolón</p>
-    <button onclick="openVerify('defense')" class="btn">Obtener</button>
+    <button onclick="selectScript('AP DEFENSE')">Seleccionar</button>
   </div>
 
-  <div class="card" data-script="spammer">
-    <div class="badge">UPD 13/02</div>
+  <div class="card">
+    <div class="topLabel">UPD 13/02</div>
+    <div class="counter">956</div>
     <h2>AP Spammer</h2>
     <p>📩 Spam FULL · SEMI</p>
-    <button onclick="openVerify('spammer')" class="btn">Obtener</button>
+    <button onclick="selectScript('AP Spammer')">Seleccionar</button>
   </div>
 
-  <div class="card" data-script="sheriff">
-    <div class="badge new">NUEVO</div>
+  <div class="card">
+    <div class="topLabel">NUEVO</div>
+    <div class="counter">1</div>
     <h2>Sheriff vs Murder</h2>
     <p>🔫 Only PC · Sheriff</p>
-    <button onclick="openVerify('sheriff')" class="btn">Obtener</button>
+    <button onclick="selectScript('Sheriff vs Murder')">Seleccionar</button>
   </div>
 
-  <div class="card" data-script="lava">
-    <div class="badge new">NUEVO</div>
+  <div class="card">
+    <div class="topLabel">NUEVO</div>
+    <div class="counter">0</div>
     <h2>Lava Brainrots</h2>
     <p>🌋 Lava · Brainrots</p>
-    <button onclick="openVerify('lava')" class="btn">Obtener</button>
+    <button onclick="selectScript('Lava Brainrots')">Seleccionar</button>
   </div>
 
-</section>
-
-<!-- ===== BOTÓN CENTRAL ===== -->
-<div class="centerBtn">
-  <button class="mainObtener">⚡ OBTENER</button>
 </div>
 
-<!-- ===== ESTADÍSTICAS ===== -->
-<section class="statsSection">
+<div class="bigObtain">
+  <button onclick="openVerify()">⚡ OBTENER</button>
+</div>
 
-  <h2>ESTADÍSTICAS GLOBALES</h2>
-
-  <div class="statsGrid">
-
-    <div class="statBox">
-      <h3>Visitas Totales</h3>
-      <span id="visitasTotal">0</span>
-    </div>
-
-    <div class="statBox">
-      <h3>Usuarios Únicos</h3>
-      <span id="uniqueUsers">0</span>
-    </div>
-
-    <div class="statBox large">
-      <h3>Scripts Obtenidos</h3>
-      <span id="totalScripts">0</span>
-      <ul>
-        <li>AP Defense <b id="cDefense">0</b></li>
-        <li>AP Spammer <b id="cSpammer">0</b></li>
-        <li>Sheriff vs Murder <b id="cSheriff">0</b></li>
-        <li>Lava Brainrots <b id="cLava">0</b></li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== OVERLAY VERIFICACIÓN ===== -->
-<div id="verifyOverlay">
+<!-- OVERLAY -->
+<div id="overlay">
   <div class="verifyBox">
-    <h2>Verificación Necesaria</h2>
-    <p>Únete a nuestro Discord para continuar</p>
-    <a href="https://discord.gg/cypherhub" target="_blank" class="discordVerify">Ir al Discord</a>
-    <button onclick="confirmVerify()" class="btn">Ya me uní</button>
+    <h2>Verificación necesaria</h2>
+    <p>Presiona verificarse para continuar</p>
+    <button onclick="verify()">Verificarse</button>
+
+    <div id="codeBox">
+      Este es el Código:<br><br>
+      <span id="scriptCode"></span>
+      <br><br>
+      <button onclick="copyCode()">Copiar Código</button>
+    </div>
   </div>
 </div>
 
