@@ -5,92 +5,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cypher Hub</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
+
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial, sans-serif;
+  font-family:'Poppins',sans-serif;
 }
 
 body{
-  background:linear-gradient(135deg,#0f051d,#1a0033,#0f051d);
+  background:radial-gradient(circle at top,#1b0033,#0c0018 60%);
   color:white;
   overflow-x:hidden;
 }
 
-/* ===== ENTRADA ===== */
+/* ===== INTRO ===== */
 
 #intro{
   position:fixed;
   width:100%;
   height:100%;
-  background:#0f051d;
+  background:#0c0018;
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   z-index:9999;
 }
 
 #intro img{
-  width:200px;
-  animation:zoomIn 1.5s ease-in-out;
+  width:220px;
+  animation:logoIntro 1.8s ease forwards;
 }
 
-@keyframes zoomIn{
-  from{transform:scale(0.6);opacity:0;}
-  to{transform:scale(1);opacity:1;}
+@keyframes logoIntro{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
 }
 
-/* ===== CONTENIDO ===== */
+/* ===== HEADER ===== */
 
-.container{
-  padding:40px 20px;
+.header{
+  padding:30px 20px;
   text-align:center;
 }
 
-h1{
-  font-size:32px;
-  margin-bottom:30px;
-  background:linear-gradient(90deg,#c084fc,#9333ea);
+.header h1{
+  font-size:34px;
+  font-weight:800;
+  background:linear-gradient(90deg,#a855f7,#9333ea,#c084fc);
   -webkit-background-clip:text;
   color:transparent;
+  text-shadow:0 0 20px rgba(168,85,247,.4);
 }
+
+/* ===== STATS ===== */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+  padding:0 20px 30px;
+}
+
+.stat-box{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  padding:15px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(147,51,234,.2);
+}
+
+.stat-box h2{
+  font-size:26px;
+  color:#c084fc;
+}
+
+/* ===== CARDS ===== */
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:20px;
+  padding:0 20px 60px;
 }
 
 .card{
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
-  padding:20px;
-  border-radius:20px;
-  transition:0.3s;
-  box-shadow:0 0 15px rgba(147,51,234,0.2);
+  background:linear-gradient(145deg,#16002a,#0d0018);
+  border-radius:25px;
+  padding:25px;
+  border:1px solid rgba(168,85,247,.2);
+  box-shadow:0 0 25px rgba(147,51,234,.2);
+  transition:.3s;
+  position:relative;
 }
 
 .card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 25px rgba(147,51,234,0.5);
+  transform:translateY(-6px);
+  box-shadow:0 0 35px rgba(168,85,247,.5);
 }
 
 .card h2{
   margin-bottom:15px;
+  font-weight:600;
 }
 
 .btn{
-  padding:10px 20px;
+  width:100%;
+  padding:12px;
   border:none;
-  border-radius:30px;
+  border-radius:40px;
   background:linear-gradient(90deg,#9333ea,#c084fc);
   color:white;
+  font-weight:600;
   cursor:pointer;
-  transition:0.3s;
+  transition:.3s;
 }
 
 .btn:hover{
@@ -99,17 +131,25 @@ h1{
 
 textarea{
   width:100%;
-  height:100px;
+  height:90px;
   margin-top:15px;
-  background:#1a0033;
-  border:none;
-  border-radius:10px;
+  background:#120021;
+  border:1px solid #9333ea;
+  border-radius:15px;
   color:#c084fc;
   padding:10px;
+  resize:none;
   display:none;
 }
 
-/* ===== VERIFICACIÓN ===== */
+/* COPIAR */
+
+.copy-btn{
+  margin-top:10px;
+  background:#22c55e;
+}
+
+/* ===== OVERLAY ===== */
 
 #overlay{
   position:fixed;
@@ -117,131 +157,131 @@ textarea{
   left:0;
   width:100%;
   height:100%;
-  background:linear-gradient(135deg,#4c1d95,#1e1b4b);
+  background:rgba(12,0,24,.95);
   display:none;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   z-index:9998;
   text-align:center;
-  padding:20px;
 }
 
 #overlay h2{
-  font-size:28px;
-  margin-bottom:15px;
+  margin-bottom:20px;
+  font-size:26px;
 }
 
-.discord-btn{
+.discord{
   background:white;
   color:#4c1d95;
-  padding:15px 30px;
+  padding:14px 30px;
   border-radius:40px;
+  font-weight:600;
   text-decoration:none;
-  font-weight:bold;
   margin-top:15px;
 }
 
-#count{
-  font-size:50px;
-  margin-top:20px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
-  <img src="logo.png" alt="Logo">
+  <img src="logo.png">
 </div>
 
-<!-- VERIFICACIÓN -->
-<div id="overlay">
-  <h2>VERIFICACIÓN NECESARIA</h2>
-  <p>Únete a nuestro Discord para obtener los códigos</p>
-  <a href="#" class="discord-btn" target="_blank">UNIRSE A DISCORD</a>
-  <div id="count">5</div>
+<div class="header">
+  <h1>CYBER HUB SCRIPTS</h1>
 </div>
 
-<div class="container">
-  <h1>CYBER HUB - CÓDIGOS</h1>
-
-  <div class="grid">
-
-    <div class="card">
-      <h2>Código 1</h2>
-      <button class="btn" onclick="obtener('c1')">Obtener</button>
-      <textarea id="c1">CODIGO-12345-AAA</textarea>
-    </div>
-
-    <div class="card">
-      <h2>Código 2</h2>
-      <button class="btn" onclick="obtener('c2')">Obtener</button>
-      <textarea id="c2">CODIGO-67890-BBB</textarea>
-    </div>
-
-    <div class="card">
-      <h2>Código 3</h2>
-      <button class="btn" onclick="obtener('c3')">Obtener</button>
-      <textarea id="c3">CODIGO-54321-CCC</textarea>
-    </div>
-
-    <div class="card">
-      <h2>Código 4</h2>
-      <button class="btn" onclick="obtener('c4')">Obtener</button>
-      <textarea id="c4">CODIGO-99999-DDD</textarea>
-    </div>
-
-    <div class="card">
-      <h2>Código 5</h2>
-      <button class="btn" onclick="obtener('c5')">Obtener</button>
-      <textarea id="c5">CODIGO-88888-EEE</textarea>
-    </div>
-
+<div class="stats">
+  <div class="stat-box">
+    <p>Usuarios online</p>
+    <h2 id="online">0</h2>
   </div>
+  <div class="stat-box">
+    <p>Visitas totales</p>
+    <h2 id="visitas">0</h2>
+  </div>
+  <div class="stat-box">
+    <p>Copias realizadas</p>
+    <h2 id="copias">0</h2>
+  </div>
+</div>
+
+<div class="grid">
+
+  ${[1,2,3,4,5].map(i=>`
+  <div class="card">
+    <h2>Código ${i}</h2>
+    <button class="btn" onclick="obtener('c${i}')">⚡ Obtener</button>
+    <textarea id="c${i}" readonly>Este es el Código:
+
+loadstring("@codigo2026-${i}")</textarea>
+    <button class="btn copy-btn" onclick="copiar('c${i}')">Copiar Código</button>
+  </div>
+  `).join("")}
+
+</div>
+
+<div id="overlay">
+  <h2>🔒 Verificación necesaria</h2>
+  <p>Únete al Discord para desbloquear</p>
+  <a href="https://discord.gg/cypherhub" target="_blank" class="discord">Ir al Discord</a>
+  <button class="btn" style="margin-top:20px" onclick="verificado()">Ya me uní</button>
 </div>
 
 <script>
 
-/* Intro desaparece */
+/* INTRO */
 setTimeout(()=>{
   document.getElementById("intro").style.display="none";
 },2000);
 
-let verificado = localStorage.getItem("verificado");
+/* STATS SIMULADAS */
+function random(min,max){
+  return Math.floor(Math.random()*(max-min)+min);
+}
 
+document.getElementById("online").textContent=random(15,60);
+document.getElementById("visitas").textContent=random(1200,8000);
+document.getElementById("copias").textContent=localStorage.getItem("copias")||0;
+
+let autorizado=localStorage.getItem("verificado");
+
+/* VERIFICACION */
 function obtener(id){
-  if(verificado){
+  if(autorizado){
     mostrar(id);
   }else{
-    verificar(id);
+    document.getElementById("overlay").style.display="flex";
+    window.codigoActual=id;
   }
 }
 
-function verificar(id){
-  const overlay = document.getElementById("overlay");
-  overlay.style.display="flex";
-  let tiempo=5;
-  const count=document.getElementById("count");
-  count.textContent=tiempo;
-
-  const intervalo=setInterval(()=>{
-    tiempo--;
-    count.textContent=tiempo;
-
-    if(tiempo<=0){
-      clearInterval(intervalo);
-      overlay.style.display="none";
-      localStorage.setItem("verificado","true");
-      verificado=true;
-      mostrar(id);
-    }
-  },1000);
+function verificado(){
+  localStorage.setItem("verificado","true");
+  autorizado=true;
+  document.getElementById("overlay").style.display="none";
+  mostrar(window.codigoActual);
 }
 
 function mostrar(id){
   document.getElementById(id).style.display="block";
+}
+
+/* COPIAR */
+
+function copiar(id){
+  let text=document.getElementById(id);
+  text.select();
+  document.execCommand("copy");
+
+  let total=parseInt(localStorage.getItem("copias")||0)+1;
+  localStorage.setItem("copias",total);
+  document.getElementById("copias").textContent=total;
+
+  alert("Código copiado 🔥");
 }
 
 </script>
